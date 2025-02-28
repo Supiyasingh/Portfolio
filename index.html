@@ -8,6 +8,7 @@
     <title>Supriya Singh_Portfolio</title>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -15,82 +16,6 @@
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
 </head>
 
-<!-- <style>
-
-  #img{
-   border-radius: 100%;
-   width: 30%;
-   /* margin-top: 10%; */
- } 
-
- #one{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    /* border: 1px solid red; */
- }
-
- .btn-rounded-blue {
-    display: inline-block;
-    color: rgb(52, 5, 239);
-    padding: 10px 10px;
-    border: 1px solid rgb(63, 60, 230);
-    border-radius: 30px;
-    margin-right: 10px;
-    }
-
-    p, ul {
-        margin: 0;
-        /* color: $text; */
-        font-size: 0.9em;
-    } */
-
-    ul {
-        padding: 0 0 0 15px;
-    }
-
-    #skillid{
-        display: flex;
-        width:70%;
-        flex-wrap: wrap;
-        margin: auto;
-        /* border: 1px solid red; */
-        justify-content: center;
-    }
-    
-    .skillclass{
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        padding: 10px;
-        margin: 20px;
-        border-radius: 5px;
-        
-    }
-    .skillclass:hover{
-        transform: scale(1.5)
-    }
-    .calendar{
-        /* border: 1px solid red; */
-        width:80%;
-        
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        padding: 20px;
-        border-radius: 5px;
-       
-    }
-    #statistics{
-        
-        width:80%;
-        margin: auto;
-        height:100%;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        padding: 20px;
-        border-radius: 5px;
-    }
-    
-    
-
-</style> -->
 <style>
     #img{
    border-radius: 100%;
@@ -242,9 +167,13 @@
                     <h1  id="h1">Supriya Singh</h1>
                     <h2>Front-End Developer</h2>
                     <div id="lead-buttons">
-                        <a href="./resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" download="SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" class="btn-rounded-white" target="_blank">Download Resume</a>
-                        <a href="./resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" class="btn-rounded-white" target="_blank">View Resume</a>
-                
+                        <a target="_blank"  href="  https://drive.google.com/file/d/1RtRJpsx86cLVJ16ZlaZc46TvxW-WZjsU/view?usp=drive_link" class="btn-rounded-white" OnClick="downloadResume()"> 
+                            <i class="fas fa-download"></i>
+                            Download Resume
+                        </a>
+                        <!-- <a href="./resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" download="SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" class="btn-rounded-white" target="_blank">Download Resume</a> -->
+                        <!-- <a href="./resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf" class="btn-rounded-white" target="_blank">View Resume</a> -->
+                        <!-- https://drive.google.com/file/d/1RtRJpsx86cLVJ16ZlaZc46TvxW-WZjsU/view?usp=drive_link -->
                     </div>
                 </div>
             </div>    
@@ -616,9 +545,35 @@
         }
     });
 </script>
-<!-- <script>
-    function startDownload(){
-     let href = ""
-     window.location.href=href
-    }
- </script> -->
+<script>
+   // Resume download functionality
+       
+   function downloadResume() {
+            fetch('./resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf') // Ensure the file exists in the same directory
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('File not found');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = './resume/SupriyaSingh-FrontendDeveloper(React)-C65V.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => {
+                alert('Error: Resume file not found! Ensure it is correctly placed.');
+                console.error(error);
+            });
+        }
+            const toast = document.getElementById('toast');
+            toast.textContent = 'Downloading resume...';
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+ </script>
